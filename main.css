@@ -1,0 +1,25 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+    font-family: "Reenie Beanie", cursive;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#board {
+    display: grid;
+    grid-template-columns: repeat(3, 10vin);
+    grid-template-rows: repeat(3m 10vin);
+    
+}
+
+#board > div {
+    border: 2px black;
+    border-radius: 50px 20px;
+}
