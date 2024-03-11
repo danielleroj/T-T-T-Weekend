@@ -15,12 +15,12 @@
 
 // constants
 const COLOR_LOOKUP = {
-    "null": white,
-    "1": #FFD4E51,
-    "-1": #BEE4E7
+    "null": "white",
+    "1": "CadetBlue",
+    "-1": "Plum"
 };
 
-const WINNING_COMBOS = {
+const winningCombos = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -31,7 +31,7 @@ const WINNING_COMBOS = {
 
     [0, 4, 8],
     [2, 4, 6]
-};
+];
 
 // state variables
 let board;
@@ -41,51 +41,84 @@ let turn;
 // cached elements
 const messageEl = document.querySelector("h2")
 const resetGameBtn = document.querySelector("button");
-const squares = Array.from(document.querySelectorAll("#board > div"));
+const squares = [...document.querySelectorAll(".ttt-square")];
 
 // event listeners
 resetGameBtn.addEventListener("click", init);
+document.getElementById("board").addEventListener("click", handleSquareClick);
 
 // functions
 init ();
 
 function init() {
-    board = [
-        [null, null, null] //col 0
-        [null, null, null] //col 1
-        [null, null, null] //col 2
-    ]
-};
-
+    board = [null, null, null, null, null, null, null, null, null];
     winner = null;
     turn = 1;
-    
     render();
+};
+
+function handleSquareClick(evt) {
+    const idx = parseInt(evt.target.id.replace("s", ""));
+    if (isNaN(idx) || board[idx] || winner)
+    return;
+    // for (let i = 0; i < squares.length; i++) {
+    //     if (squares[i] === evt.target) {
+    //         handlePlay(i);
+    //         break;
+    //     }
+        // if (winner !== null) {
+        //     return;
+        // }
+        board[idx] = turn;
+        winner = checkWinner();
+        turn *=-1; //toggle
+    render();
+}
+
+function checkWinner() {
+    for (let combo of winningCombos) {
+        if (Math.abs(board[combo[0]] + board[combo[1]]) + board[combo[2]] === 3) 
+        return turn;
+    }
+    // winningCombos.forEach(function(winningCombo) {
+    //     let total = board[winningCombo[0]] + board[winningCombo[1]] + board[winningCombo[2]];        
+    //     total = Math.abs(total);
+    //     if (total === 3) {
+    //         return turn;
+    //     }
+        if (board.includes(null)) return null;
+        return  "T";
+}
 
 function render() {
     renderBoard();
     renderMessage();
 }
 
+function renderBoard() {
+    // looping over board array
+    board.forEach(function(square, idx) {
+        // access the corresponding square
+        const squareEl = document.getElementById(`s${idx}`);
+        squareEl.style.backgroundColor = COLOR_LOOKUP[square];
+        squareEl.className = !square ? "avail" : "";
+    });
+}
+
 function renderMessage() {
     if (winner === "T") {
         // tie game
         messageEl.innerText = "No one wins - try again!";
-    } else if(winner) {
+    } else if (winner) {
         // winner
-        messageEl.innerHTML = `<span style="color: ${COLOR_LOOKUP[winner]}">${COLOR_LOOKUP[winner]}</span> wins!`;
+        messageEl.innerHTML = `<span style="color: ${COLOR_LOOKUP[winner]}">${COLOR_LOOKUP[winner].toUpperCase()}</span> wins!`;
     } else {
         // turn
-        messageEl.innerHTML = `<span style="color: ${COLOR_LOOKUP[turn]}">${COLOR_LOOKUP[turn]}'s turn`;
+        messageEl.innerHTML = `<span style="color: ${COLOR_LOOKUP[turn]}">${COLOR_LOOKUP[turn].toUpperCase()}</span>'s turn`;
     }
 }
 
-function renderBoard() {
-      board.forEach(function(colArray, colIdx)  {
-        colArray.forEach(function(cellValue, rowIdx) {
-        const cellId = `c${colIdx}r${rowIdx}`;
-        const cellEl = document.getElementById(cellId);
-        cellEl.style.backgroundColor = COLOR_LOOKUP[cellValue];
-        });
-      });
-}
+
+
+
+

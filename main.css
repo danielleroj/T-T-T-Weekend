@@ -1,25 +1,60 @@
 * {
     box-sizing: border-box;
+    font-family: "Reenie Beanie", cursive;
 }
 
 body {
     height: 100vh;
     margin: 0;
-    font-family: "Reenie Beanie", cursive;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
+    background-color: linen;
+}
+
+h1 {
+    letter-spacing: 2vmin;
+    margin: auto;
+    font-size: 10vmin;
+}
+
+h2 {
+    margin: auto;
+    font-size: 6vmin;
 }
 
 #board {
     display: grid;
-    grid-template-columns: repeat(3, 10vin);
-    grid-template-rows: repeat(3m 10vin);
-    
+    grid-template-columns: repeat(3, 20vmin);
+    grid-template-rows: repeat(3, 20vmin);
+    background-color:#c06c84;
 }
 
 #board > div {
-    border: 2px black;
-    border-radius: 50px 20px;
+    margin: .5vmin;
+    background-color: white;
+    border: .5vmin solid white;
+}
+
+#board > div.avail {
+    cursor: pointer;
+}
+
+#board > div.avail:hover {
+    border-color: darkslateblue;
+}
+
+
+button {
+    border: 0.1vmin solid gray;
+    border-radius: 4vmin;
+    margin-top: 4vmin;
+    padding: 1vmin;
+    font-size: 5vmin;
+}
+
+button:hover {
+    color: white;
+    background-color: #c06c84;
 }
