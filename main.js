@@ -24,11 +24,9 @@ const winningCombos = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
-
     [0, 3, 6],
     [1, 4, 7],
     [2, 5, 8],
-
     [0, 4, 8],
     [2, 4, 6]
 ];
@@ -76,16 +74,17 @@ function handleSquareClick(evt) {
 }
 
 function checkWinner() {
+    // loop
     for (let combo of winningCombos) {
-        if (Math.abs(board[combo[0]] + board[combo[1]]) + board[combo[2]] === 3) 
-        return turn;
-    }
+        if (Math.abs(board[combo[0]] + board[combo[1]] + board[combo[2]]) === 3) {
+            return turn;
+        }        
     // winningCombos.forEach(function(winningCombo) {
     //     let total = board[winningCombo[0]] + board[winningCombo[1]] + board[winningCombo[2]];        
     //     total = Math.abs(total);
     //     if (total === 3) {
     //         return turn;
-    //     }
+     }
         if (board.includes(null)) return null;
         return  "T";
 }
@@ -117,8 +116,3 @@ function renderMessage() {
         messageEl.innerHTML = `<span style="color: ${COLOR_LOOKUP[turn]}">${COLOR_LOOKUP[turn].toUpperCase()}</span>'s turn`;
     }
 }
-
-
-
-
-
