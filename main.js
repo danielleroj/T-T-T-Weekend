@@ -99,6 +99,13 @@ function renderBoard() {
     board.forEach(function(square, idx) {
         // access the corresponding square
         const squareEl = document.getElementById(`s${idx}`);
+        if (square === 1) {
+            squareEl.innerText = "X";
+        } else if (square === -1) {
+            squareEl.innerText = "O";
+        } else {
+            squareEl.innerText = "";
+        }
         squareEl.style.backgroundColor = COLOR_LOOKUP[square];
         squareEl.className = !square ? "avail" : "";
     });
