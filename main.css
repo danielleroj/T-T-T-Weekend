@@ -11,6 +11,8 @@ body {
     justify-content: center;
     align-items: center;
     background-color: linen;
+    background-image: url("blank-white-notepaper-design_53876-118304.jpg");
+    background-size: cover;
 }
 
 h1 {
