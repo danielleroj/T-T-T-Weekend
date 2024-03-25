@@ -1,18 +1,3 @@
-/* 1) Define required constants
-
-2) Define required variables used to track the state of the game
-
-3) Store elements on the page that will be accessed in code more than once in variables to make code more concise, readable and performant.
-
-4) Upon loading the app should:
-  4.1) Initialize the state variables
-  4.2) Render those values to the page
-  4.3) Wait for the user to click a square
-
-5) Handle a player clicking a square
-
-6) Handle a player clicking the replay button */
-
 // constants
 const COLOR_LOOKUP = {
   null: "white",
@@ -58,13 +43,6 @@ function init() {
 function handleSquareClick(evt) {
   const idx = parseInt(evt.target.id.replace("s", ""));
   if (isNaN(idx) || board[idx] || winner) return;
-  // for (let i = 0; i < squares.length; i++) {
-  //     if (squares[i] === evt.target) {
-  //         handlePlay(i);
-  //         break;
-  //     }
-  // if (winner !== null) {
-  //     return;
   // }
   board[idx] = turn;
   winner = checkWinner();
@@ -78,11 +56,6 @@ function checkWinner() {
     if (Math.abs(board[combo[0]] + board[combo[1]] + board[combo[2]]) === 3) {
       return turn;
     }
-    // winningCombos.forEach(function(winningCombo) {
-    //     let total = board[winningCombo[0]] + board[winningCombo[1]] + board[winningCombo[2]];
-    //     total = Math.abs(total);
-    //     if (total === 3) {
-    //         return turn;
   }
   if (board.includes(null)) return null;
   return "T";
